@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Records | Restaurant Reservation Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-update">
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-wrapper">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h1>TEJESWAR RESTAURANT</h1>
+          <span>Reservation System</span>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle Navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="insert.html" class="nav-link">Add Records</a></li>
+        <li><a href="list.html" class="nav-link">View Records</a></li>
+        <li><a href="listOne.html" class="nav-link">Search Records</a></li>
+        <li><a href="update.html" class="nav-link">Update Records</a></li>
+        <li><a href="delete.html" class="nav-link">Delete Records</a></li>
+        <li><a href="customers.html" class="nav-link">Customers</a></li>
+        <li><a href="tables.html" class="nav-link">Tables</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+    <div id="update-alert"></div>
+
+    <section class="page-header">
+      <div class="page-header-text">
+        <h2>Update Existing Records</h2>
+        <p>Load any Customer, Table, or Reservation by ID and edit their parameters</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="list.html" class="btn btn-outline">View All Records</a>
+      </div>
+    </section>
+
+    <!-- Selector Card -->
+    <section class="card">
+      <div class="card-header">
+        <h3 class="card-title">✏️ Select Record to Edit</h3>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="update-entity-type">Record Category <span class="required">*</span></label>
+          <select id="update-entity-type" class="form-control">
+            <option value="reservation" selected>Reservation</option>
+            <option value="customer">Customer</option>
+            <option value="table">Restaurant Table</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="update-record-id">Target Record ID <span class="required">*</span></label>
+          <div style="display:flex; gap:0.75rem;">
+            <input type="number" id="update-record-id" class="form-control" placeholder="Enter ID (e.g. 1)" min="1" required />
+            <button type="button" id="update-load-btn" class="btn btn-primary" style="white-space:nowrap;">Load Record</button>
+          </div>
+          <div class="form-help">Loads the record from MySQL and pre-fills the form fields for editing.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Edit Form Container -->
+    <section id="update-form-container">
+      <div class="empty-state">
+        <div class="empty-state-icon">📝</div>
+        <h3>No Record Loaded Yet</h3>
+        <p>Choose an entity type and enter its primary key ID above to load and modify existing values.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <span class="gold">Tejeswar Restaurant</span> — Restaurant Reservation Management System. Connected to MySQL database <span class="gold">reservation</span>.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

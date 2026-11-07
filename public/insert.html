@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Records | Restaurant Reservation Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-insert">
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-wrapper">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h1>TEJESWAR RESTAURANT</h1>
+          <span>Reservation System</span>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle Navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="insert.html" class="nav-link">Add Records</a></li>
+        <li><a href="list.html" class="nav-link">View Records</a></li>
+        <li><a href="listOne.html" class="nav-link">Search Records</a></li>
+        <li><a href="update.html" class="nav-link">Update Records</a></li>
+        <li><a href="delete.html" class="nav-link">Delete Records</a></li>
+        <li><a href="customers.html" class="nav-link">Customers</a></li>
+        <li><a href="tables.html" class="nav-link">Tables</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+    <section class="page-header">
+      <div class="page-header-text">
+        <h2>Insert New Database Records</h2>
+        <p>Create new entries for Customers, Tables, and Reservations</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="list.html" class="btn btn-outline">View All Existing Records</a>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs for Switching Forms -->
+    <div class="section-tabs">
+      <button type="button" class="tab-btn active" data-target="tab-reservation">📅 New Reservation</button>
+      <button type="button" class="tab-btn" data-target="tab-customer">👤 New Customer</button>
+      <button type="button" class="tab-btn" data-target="tab-table">🪑 New Restaurant Table</button>
+    </div>
+
+    <!-- TAB 1: ADD RESERVATION -->
+    <section id="tab-reservation" class="tab-pane active">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📅 Book a Table Reservation</h3>
+          <span style="font-size:0.85rem; color:var(--text-muted);">Links Customer & Table via Foreign Keys</span>
+        </div>
+
+        <div id="reservation-alert"></div>
+
+        <form id="form-add-reservation">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="reservation-customer-id">Select Customer <span class="required">*</span></label>
+              <select id="reservation-customer-id" class="form-control" required>
+                <option value="">Loading customer records...</option>
+              </select>
+              <div class="form-help">Choose from registered customers or add one below.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="reservation-table-id">Select Restaurant Table <span class="required">*</span></label>
+              <select id="reservation-table-id" class="form-control" required>
+                <option value="">Loading tables...</option>
+              </select>
+              <div class="form-help" id="table-capacity-hint" style="color:var(--primary-gold-light); font-weight:600;"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="reservation-date">Reservation Date <span class="required">*</span></label>
+              <input type="date" id="reservation-date" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="reservation-time">Reservation Time <span class="required">*</span></label>
+              <input type="time" id="reservation-time" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="reservation-guests">Number of Guests <span class="required">*</span></label>
+              <input type="number" id="reservation-guests" class="form-control" min="1" max="50" placeholder="e.g. 4" required />
+              <div class="form-help">Must not exceed the selected table's maximum capacity.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="reservation-status">Reservation Status <span class="required">*</span></label>
+              <select id="reservation-status" class="form-control" required>
+                <option value="Confirmed" selected>Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">Confirm & Save Reservation</button>
+            <button type="reset" class="btn btn-outline">Clear Fields</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB 2: ADD CUSTOMER -->
+    <section id="tab-customer" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">👤 Register New Customer</h3>
+          <span style="font-size:0.85rem; color:var(--text-muted);">Saves directly into customers table</span>
+        </div>
+
+        <div id="customer-alert"></div>
+
+        <form id="form-add-customer">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="customer-name">Full Name <span class="required">*</span></label>
+              <input type="text" id="customer-name" class="form-control" placeholder="e.g. John Doe" maxlength="15" required />
+              <div class="form-help">Max 15 characters (database schema constraint: VARCHAR(15)).</div>
+            </div>
+
+            <div class="form-group">
+              <label for="customer-phone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="customer-phone" class="form-control" placeholder="e.g. +1 555-0199" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customer-email">Email Address <span class="required">*</span></label>
+              <input type="email" id="customer-email" class="form-control" placeholder="e.g. john@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customer-password">Account Password (Optional)</label>
+              <input type="password" id="customer-password" class="form-control" placeholder="Leave blank if not applicable" />
+              <div class="form-help">Stored in customer profile.</div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">Save Customer</button>
+            <button type="reset" class="btn btn-outline">Reset Form</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB 3: ADD TABLE -->
+    <section id="tab-table" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🪑 Add Restaurant Table</h3>
+          <span style="font-size:0.85rem; color:var(--text-muted);">Saves directly into tables table</span>
+        </div>
+
+        <div id="table-alert"></div>
+
+        <form id="form-add-table">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="table-number">Table Identifier / Number <span class="required">*</span></label>
+              <input type="text" id="table-number" class="form-control" placeholder="e.g. T-12, Booth 4, Patio 1" required />
+            </div>
+
+            <div class="form-group">
+              <label for="table-capacity">Seating Capacity <span class="required">*</span></label>
+              <input type="number" id="table-capacity" class="form-control" min="1" max="40" placeholder="e.g. 4" required />
+              <div class="form-help">Maximum number of dining seats.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="table-location">Restaurant Location / Area</label>
+              <input type="text" id="table-location" class="form-control" placeholder="e.g. Main Dining, Window Side, VIP Lounge, Terrace" />
+            </div>
+
+            <div class="form-group">
+              <label for="table-status">Initial Table Status <span class="required">*</span></label>
+              <select id="table-status" class="form-control" required>
+                <option value="Available" selected>Available</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Maintenance">Maintenance</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">Save Table</button>
+            <button type="reset" class="btn btn-outline">Reset Form</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <span class="gold">Tejeswar Restaurant</span> — Restaurant Reservation Management System. Connected to MySQL database <span class="gold">reservation</span>.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Record | Restaurant Reservation Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-listone">
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-wrapper">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h1>TEJESWAR RESTAURANT</h1>
+          <span>Reservation System</span>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle Navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="insert.html" class="nav-link">Add Records</a></li>
+        <li><a href="list.html" class="nav-link">View Records</a></li>
+        <li><a href="listOne.html" class="nav-link">Search Records</a></li>
+        <li><a href="update.html" class="nav-link">Update Records</a></li>
+        <li><a href="delete.html" class="nav-link">Delete Records</a></li>
+        <li><a href="customers.html" class="nav-link">Customers</a></li>
+        <li><a href="tables.html" class="nav-link">Tables</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+    <div id="search-alert"></div>
+
+    <section class="page-header">
+      <div class="page-header-text">
+        <h2>Single Record Lookup</h2>
+        <p>Search any Customer, Table, or Reservation by ID, Name, Phone Number, or Status</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="list.html" class="btn btn-outline">Browse All Records</a>
+      </div>
+    </section>
+
+    <!-- Search Controls Card -->
+    <section class="card">
+      <div class="card-header">
+        <h3 class="card-title">🔍 Query Database</h3>
+      </div>
+
+      <form id="search-single-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="search-entity-type">Select Entity Type <span class="required">*</span></label>
+            <select id="search-entity-type" class="form-control" required>
+              <option value="reservation" selected>Reservation (Search by ID, Status, or Customer)</option>
+              <option value="customer">Customer (Search by ID, Name, Phone, or Email)</option>
+              <option value="table">Table (Search by Table ID, Number, or Location)</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label for="search-query-input">Enter Search Keyword / Record ID <span class="required">*</span></label>
+            <div style="display:flex; gap:0.75rem;">
+              <input 
+                type="text" 
+                id="search-query-input" 
+                class="form-control" 
+                placeholder="Enter Customer ID, Table ID, Reservation ID, Name, Phone, or Status..." 
+                required 
+              />
+              <button type="submit" class="btn btn-primary" style="white-space:nowrap;">Search Record</button>
+              <button type="button" id="search-clear-btn" class="btn btn-outline" style="white-space:nowrap;">Clear</button>
+            </div>
+            <div class="form-help">Enter a numeric ID (e.g. 1) or text keyword (e.g. John, Confirmed, Patio).</div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Dynamic Result Display Container -->
+    <section id="search-single-result">
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h3>Ready to Query the Database</h3>
+        <p>Select an entity category above and type a search term to view full details from MySQL.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <span class="gold">Tejeswar Restaurant</span> — Restaurant Reservation Management System. Connected to MySQL database <span class="gold">reservation</span>.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

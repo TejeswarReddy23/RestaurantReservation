@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Management | Restaurant Reservation System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-reservations">
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-wrapper">
+        <div class="brand-icon">🍽️</div>
+        <div class="brand-text">
+          <h1>TEJESWAR RESTAURANT</h1>
+          <span>Reservation System</span>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle Navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li><a href="insert.html" class="nav-link">Add Records</a></li>
+        <li><a href="list.html" class="nav-link">View Records</a></li>
+        <li><a href="listOne.html" class="nav-link">Search Records</a></li>
+        <li><a href="update.html" class="nav-link">Update Records</a></li>
+        <li><a href="delete.html" class="nav-link">Delete Records</a></li>
+        <li><a href="customers.html" class="nav-link">Customers</a></li>
+        <li><a href="tables.html" class="nav-link">Tables</a></li>
+        <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+    <div id="mgmt-resv-alert"></div>
+
+    <section class="page-header">
+      <div class="page-header-text">
+        <h2>Reservation Management</h2>
+        <p>Manage bookings, date filters, seat allocations, and booking statuses</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="#book-table-card" class="btn btn-primary">+ New Reservation</a>
+        <a href="list.html" class="btn btn-outline">All Database Records</a>
+      </div>
+    </section>
+
+    <!-- Quick Add Reservation Card -->
+    <section id="book-table-card" class="card">
+      <div class="card-header">
+        <h3 class="card-title">📅 Create Reservation</h3>
+      </div>
+      <form id="form-mgmt-add-reservation">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="mgmt-resv-cust">Customer <span class="required">*</span></label>
+            <select id="mgmt-resv-cust" class="form-control" required>
+              <option value="">Loading customer records...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mgmt-resv-tbl">Restaurant Table <span class="required">*</span></label>
+            <select id="mgmt-resv-tbl" class="form-control" required>
+              <option value="">Loading tables...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mgmt-resv-date">Reservation Date <span class="required">*</span></label>
+            <input type="date" id="mgmt-resv-date" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mgmt-resv-time">Reservation Time <span class="required">*</span></label>
+            <input type="time" id="mgmt-resv-time" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mgmt-resv-guests">Guest Count <span class="required">*</span></label>
+            <input type="number" id="mgmt-resv-guests" class="form-control" min="1" max="40" placeholder="e.g. 2" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mgmt-resv-status">Status <span class="required">*</span></label>
+            <select id="mgmt-resv-status" class="form-control" required>
+              <option value="Confirmed" selected>Confirmed</option>
+              <option value="Pending">Pending</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Reservation to MySQL</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Reservations Master List Card -->
+    <section class="card">
+      <div class="card-header">
+        <h3 class="card-title">📅 Master Reservations Schedule</h3>
+      </div>
+
+      <!-- Search & Date/Status Filter Bar -->
+      <div class="search-filter-bar">
+        <div class="search-input-wrapper">
+          <span class="search-icon-inside">🔍</span>
+          <input type="text" id="reservations-mgmt-search" class="form-control" placeholder="Search by customer name, phone, table number..." />
+        </div>
+        <div>
+          <input type="date" id="reservations-mgmt-date" class="form-control" title="Filter by Reservation Date" />
+        </div>
+        <div style="min-width: 160px;">
+          <select id="reservations-mgmt-status" class="form-control">
+            <option value="all">All Statuses</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Pending">Pending</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Res ID</th>
+              <th>Customer Name & Phone</th>
+              <th>Table & Location</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Guests</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="reservations-mgmt-tbody">
+            <tr>
+              <td colspan="8" style="text-align:center; padding:2rem;">Loading reservations from MySQL...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <span class="gold">Tejeswar Restaurant</span> — Restaurant Reservation Management System. Connected to MySQL database <span class="gold">reservation</span>.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
